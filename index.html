@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Real World CE | NT1 Patient & Data Masterclass Elite</title>
+<title>Real World CE | Real World Patient</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+
 <style>
 :root{
   --rw-blue:#2563eb;
   --rw-blue-dark:#1d4ed8;
-  --rw-indigo:#4338ca;
-  --rw-cyan:#06b6d4;
+  --rw-indigo:#1e40af;
+  --rw-cyan:#38bdf8;
+  --rw-medical:#002147;
   --rw-ink:#0f172a;
   --rw-muted:#64748b;
   --rw-line:#e2e8f0;
@@ -23,10 +25,7 @@ html{scroll-behavior:smooth}
 body{
   font-family:'Inter',sans-serif;
   color:var(--rw-ink);
-  background:
-    radial-gradient(1000px 500px at 0% 0%, rgba(37,99,235,.15), rgba(37,99,235,0) 60%),
-    radial-gradient(900px 500px at 100% 10%, rgba(6,182,212,.10), rgba(6,182,212,0) 55%),
-    linear-gradient(180deg,#f8fbff 0%, #eef4fb 40%, #f8fafc 100%);
+  background:#f8fafc;
 }
 .mono{font-family:'JetBrains Mono',monospace}
 .scrollbar-hide::-webkit-scrollbar{display:none}
@@ -37,36 +36,41 @@ body{
 @keyframes blink{0%{opacity:.2}20%{opacity:1}100%{opacity:.2}}
 @keyframes dropBind{0%{transform:translateY(0) scale(1);opacity:0}20%{opacity:1}80%{transform:translateY(100px) scale(.85);opacity:1}100%{transform:translateY(112px) scale(0);opacity:0}}
 
+.glass-cmv{
+  background:rgba(255,255,255,0.90);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(226,232,240,1);
+}
 .glass-shell{
-  background:rgba(255,255,255,.76);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(226,232,240,.9);
-  box-shadow:0 20px 60px rgba(15,23,42,.08);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(226,232,240,.95);
+  box-shadow:0 14px 34px rgba(15,23,42,.05);
 }
 .elite-card{
-  background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
+  background:#ffffff;
   border:1px solid rgba(226,232,240,.95);
   border-radius:24px;
-  box-shadow:0 16px 40px rgba(15,23,42,.05);
+  box-shadow:0 12px 28px rgba(15,23,42,.04);
 }
 .soft-card{
-  background:rgba(255,255,255,.94);
+  background:#ffffff;
   border:1px solid rgba(226,232,240,.95);
   border-radius:20px;
-  box-shadow:0 10px 24px rgba(15,23,42,.04);
+  box-shadow:0 8px 20px rgba(15,23,42,.04);
 }
 .metric-card{position:relative;overflow:hidden}
 .metric-card::after{
   content:"";position:absolute;inset:auto -10% -55% auto;width:140px;height:140px;border-radius:999px;
-  background:radial-gradient(circle, rgba(37,99,235,.14), rgba(37,99,235,0) 70%);
+  background:radial-gradient(circle, rgba(37,99,235,.10), rgba(37,99,235,0) 70%);
 }
 .pill{
   display:inline-flex;align-items:center;gap:.45rem;padding:.42rem .72rem;border-radius:999px;border:1px solid rgba(226,232,240,.95);
-  background:rgba(255,255,255,.88);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#475569;
+  background:rgba(255,255,255,.92);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#475569;
 }
 .rw-btn-primary{
-  background:linear-gradient(135deg,var(--rw-blue),var(--rw-indigo));
-  color:white;box-shadow:0 18px 34px rgba(37,99,235,.24);transition:.22s ease;
+  background:linear-gradient(135deg,#2563eb,#1e40af);
+  color:white;box-shadow:0 14px 28px rgba(37,99,235,.20);transition:.22s ease;
 }
 .rw-btn-primary:hover{transform:translateY(-1px);filter:brightness(.98)}
 .rw-btn-secondary{background:#fff;border:1px solid var(--rw-line);color:var(--rw-ink);transition:.2s ease}
@@ -77,7 +81,7 @@ body{
 .typing-indicator span:nth-child(3){animation-delay:.4s}
 .bubble-bot,.bubble-user{overflow-wrap:normal;word-break:normal;line-height:1.65}
 .bubble-bot{border:1px solid rgba(226,232,240,.95);box-shadow:0 10px 24px rgba(15,23,42,.05)}
-.bubble-user{box-shadow:0 14px 30px rgba(37,99,235,.18)}
+.bubble-user{box-shadow:0 14px 30px rgba(37,99,235,.12)}
 .learning-tab{white-space:nowrap}
 .learning-tab[disabled]{opacity:.45;cursor:not-allowed}
 .particle{position:absolute;width:10px;height:10px;background:#60a5fa;border-radius:50%;box-shadow:0 0 15px #60a5fa, 0 0 30px #3b82f6;opacity:0}
@@ -100,49 +104,53 @@ body{
   .page-shell{padding:1rem}
   .chart-grid{grid-template-columns:1fr}
   .quiz-actions,.interaction-wrap{padding:1rem}
+  .module-heading{max-width:none}
 }
-
 button,[role="button"],a{cursor:pointer}
 button:disabled{cursor:not-allowed}
 #chat-container, #interaction-area, .learning-tab{position:relative;z-index:2}
 #view-consult, #view-patho, #view-data, #view-quiz{pointer-events:auto}
-@media (max-width:768px){
-  .learning-tab{font-size:.8rem;padding:.85rem 1rem}
-  .module-heading{max-width:none}
-}
-
 </style>
+
 </head>
-<body class="min-h-screen overflow-x-hidden">
-<header class="sticky top-0 z-50 border-b border-white/50 bg-white/70 backdrop-blur-xl">
-  <div class="max-w-[1680px] mx-auto px-4 md:px-6 h-[78px] flex items-center justify-between gap-4">
-    <div class="flex items-center min-w-0">
-      <div class="min-w-0">
-        <div class="font-black text-lg md:text-xl tracking-tight uppercase text-slate-900 truncate">REAL WORLD <span class="text-blue-600">CE</span></div>
-        <div class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.24em] text-slate-500 truncate">Featuring: <span class="text-slate-900">REAL</span> <span class="text-blue-600">Patient & Data</span></div>
+<body class="bg-slate-50 text-slate-900 h-screen overflow-x-hidden">
+
+<header class="sticky top-0 z-50 glass-cmv">
+  <div class="w-full max-w-[1680px] mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="leading-tight min-w-0">
+        <div class="text-base sm:text-lg font-extrabold tracking-tight uppercase whitespace-nowrap text-slate-900">
+          REAL WORLD <span class="text-blue-600">CE</span>
+        </div>
+        <div class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 mt-1">
+          Featuring:
+          <span class="font-extrabold text-slate-900">REAL WORLD </span>
+          <span class="font-extrabold text-blue-600">PATIENT</span>
+        </div>
       </div>
     </div>
+
     <div class="header-progress hidden md:flex items-center gap-4 shrink-0">
       <div class="text-right">
         <div class="text-[10px] font-black text-slate-500 uppercase tracking-[0.22em]">Mastery Progress</div>
         <div class="text-sm font-bold text-slate-900"><span id="progress-label">10</span>% complete</div>
       </div>
       <div class="w-40 h-2 rounded-full bg-slate-200 overflow-hidden">
-        <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500" style="width:10%"></div>
+        <div id="progress-bar" class="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-500" style="width:10%"></div>
       </div>
     </div>
   </div>
 </header>
 
-<main class="page-shell max-w-[1680px] mx-auto p-4 md:p-6">
+
+<main class="page-shell max-w-[1680px] mx-auto p-4 md:p-6 bg-slate-50">
   <section class="elite-card overflow-hidden mb-6">
     <div class="grid lg:grid-cols-[1.35fr_.85fr] gap-0">
-      <div class="hero-top p-6 md:p-8 lg:p-10 relative overflow-hidden bg-[linear-gradient(135deg,rgba(15,23,42,.97),rgba(30,41,59,.94),rgba(30,64,175,.88))] text-white">
+      <div class="hero-top p-6 md:p-8 lg:p-10 relative overflow-hidden bg-[linear-gradient(135deg,#002147,#0f274d,#1d4ed8)] text-white">
         <div class="absolute inset-0 opacity-40" style="background:radial-gradient(circle at 20% 20%, rgba(96,165,250,.5), transparent 30%), radial-gradient(circle at 80% 20%, rgba(34,211,238,.35), transparent 25%), linear-gradient(180deg, transparent, rgba(255,255,255,.05));"></div>
         <div class="relative z-10 max-w-3xl">
-          <span class="pill !bg-white/10 !text-blue-100 !border-white/15 mb-4">Elite Clinical Simulation</span>
-          <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-[1.02] module-heading max-w-none">NT1 Patient & Data Masterclass</h1>
-          <p class="mt-4 text-sm md:text-base text-blue-50/90 max-w-2xl leading-7">A premium Real World CE learning experience built around diagnostic delay, orexin-pathway restoration, and late-stage efficacy data for emerging narcolepsy type 1 therapies.</p>
+<h1 class="text-3xl md:text-5xl font-black tracking-tight leading-[1.02] module-heading max-w-none">NT1 Patient & Data Masterclass</h1>
+          <p class="mt-4 text-sm md:text-base text-slate-200 max-w-2xl leading-7">A premium Real World CE learning experience built around diagnostic delay, orexin-pathway restoration, and late-stage efficacy data for emerging narcolepsy type 1 therapies.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <span class="pill !bg-white/10 !border-white/15 !text-white"><span class="material-symbols-outlined text-[16px]">forum</span> Interactive Consult</span>
             <span class="pill !bg-white/10 !border-white/15 !text-white"><span class="material-symbols-outlined text-[16px]">neurology</span> Mechanism Animation</span>
@@ -168,7 +176,7 @@ button:disabled{cursor:not-allowed}
                 <div class="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Learning Route</div>
                 <div class="text-xl font-black text-slate-900 mt-2">Consult → Mechanism → Data → Competence</div>
               </div>
-              <div class="hero-orb hidden md:flex w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 items-center justify-center shadow-lg">
+              <div class="hero-orb hidden md:flex w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 items-center justify-center shadow-lg">
                 <span class="material-symbols-outlined text-white text-3xl">auto_awesome</span>
               </div>
             </div>
@@ -277,9 +285,9 @@ button:disabled{cursor:not-allowed}
 
       <div class="relative flex-1 bg-[linear-gradient(180deg,rgba(255,255,255,.75),rgba(248,250,252,.95))]">
         <div id="view-consult" class="absolute inset-0 flex flex-col">
-          <div class="p-6 border-b border-slate-200 bg-gradient-to-r from-slate-950 to-slate-900 text-white">
+          <div class="p-6 border-b border-slate-200 bg-[linear-gradient(135deg,#002147,#0f274d)] text-white">
             <div class="max-w-4xl">
-              <div class="text-[11px] font-black uppercase tracking-[0.22em] text-blue-300">Phase 1</div>
+              <div class="text-[11px] font-black uppercase tracking-[0.22em] text-slate-300">Phase 1</div>
               <h2 class="text-2xl md:text-3xl font-black mt-2">Find the hidden signal beneath “fatigue”</h2>
               <p class="text-sm text-slate-300 mt-3 max-w-2xl leading-7">Use the consult to test whether this patient’s history reflects depression alone or whether cataplexy and excessive daytime sleepiness reveal NT1.</p>
             </div>
@@ -354,11 +362,11 @@ button:disabled{cursor:not-allowed}
                 <div class="flex-1 relative w-full"><canvas id="chart-tak"></canvas></div>
               </div>
             </div>
-            <div class="elite-card p-6 md:p-7 bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-100 flex flex-col md:flex-row md:items-center gap-6">
+            <div class="elite-card p-6 md:p-7 bg-slate-50 border-slate-200 flex flex-col md:flex-row md:items-center gap-6">
               <div class="text-5xl font-black text-blue-600 tracking-tighter shrink-0">80<span class="text-3xl">%</span></div>
               <div>
-                <h4 class="font-black text-blue-950 text-xl">Median reduction in weekly cataplexy rates</h4>
-                <p class="text-blue-900/85 text-sm mt-2 leading-7">Phase 3 oveporexton data suggest that pathophysiology-first therapy may deliver meaningful anti-cataplectic benefit without relying on the same framework as legacy stimulants.</p>
+                <h4 class="font-black text-slate-900 text-xl">Median reduction in weekly cataplexy rates</h4>
+                <p class="text-slate-600 text-sm mt-2 leading-7">Phase 3 oveporexton data suggest that pathophysiology-first therapy may deliver meaningful anti-cataplectic benefit without relying on the same framework as legacy stimulants.</p>
               </div>
             </div>
             <div class="flex justify-end pt-2">
